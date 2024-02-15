@@ -1,0 +1,1 @@
+<template>Landing Page</template>
