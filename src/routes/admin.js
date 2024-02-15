@@ -2,7 +2,7 @@ export default {
   path: "/admin",
   name: "Admin",
   component: () => import("@/layouts/admin.vue"),
-  redirect: "/admin/user",
+  redirect: "/admin/dashboard",
   children: [
     {
       path: "dash",
