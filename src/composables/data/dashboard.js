@@ -145,3 +145,8 @@ export const objectDataline = {
   ],
   jumlah: [21122, 3398, 2140, 2210, 4410, 21420, 0, 1100, 10000, 2300, 1440, 0],
 };
+
+export const objectDataRadian = {
+  series: [44, 55, 67, 83],
+  labels: ["Apples", "Oranges", "Bananas", "Berries"],
+};

@@ -4,7 +4,7 @@ import DashNavbar from "@/components/inkia/AdminNavbar.vue";
 <template>
   <div>
     <DashNavbar />
-    <div class="max-w-[1280px] p-4 mx-auto">
+    <div class="max-w-[1320px] p-4 mx-auto">
       <RouterView />
     </div>
   </div>
