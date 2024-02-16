@@ -1,5 +1,5 @@
-<script setup lang="ts">
-import { h } from "vue";
+<script setup>
+import { h, ref } from "vue";
 import { useForm } from "vee-validate";
 
 import { toTypedSchema } from "@vee-validate/zod";
@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/toast";
 import Toaster from "@/components/ui/toast/Toaster.vue";
 
+const isPassword = ref(true);
 const formSchema = toTypedSchema(
   z.object({
     username: z
@@ -85,12 +86,17 @@ const onSubmit = handleSubmit((values) => {
       <FormField v-slot="{ componentField }" name="password">
         <FormItem v-auto-animate>
           <FormLabel>Password</FormLabel>
-          <FormControl>
+          <FormControl class="relative">
             <Input
-              type="password"
+              :type="isPassword ? 'password' : 'text'"
               placeholder="password"
               v-bind="componentField"
             />
+            <span
+              class="absolute right-4 top-9 text-xs cursor-pointer select-none"
+              @click="isPassword = !isPassword"
+              >{{ isPassword ? "Show" : "Hide" }}</span
+            >
           </FormControl>
           <FormDescription> </FormDescription>
           <FormMessage />
