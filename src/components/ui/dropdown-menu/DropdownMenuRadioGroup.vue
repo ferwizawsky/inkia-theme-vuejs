@@ -1,15 +1,14 @@
-<script setup lang="ts">
-import {
-  DropdownMenuRadioGroup,
-  type DropdownMenuRadioGroupEmits,
-  type DropdownMenuRadioGroupProps,
-  useForwardPropsEmits,
-} from 'radix-vue'
+<script setup>
+import { DropdownMenuRadioGroup, useForwardPropsEmits } from "radix-vue";
 
-const props = defineProps<DropdownMenuRadioGroupProps>()
-const emits = defineEmits<DropdownMenuRadioGroupEmits>()
+const props = defineProps({
+  modelValue: { type: String, required: false },
+  asChild: { type: Boolean, required: false },
+  as: { type: null, required: false },
+});
+const emits = defineEmits(["update:modelValue"]);
 
-const forwarded = useForwardPropsEmits(props, emits)
+const forwarded = useForwardPropsEmits(props, emits);
 </script>
 
 <template>

@@ -5,7 +5,7 @@ export default {
   redirect: "/admin/dashboard",
   children: [
     {
-      path: "dash",
+      path: "dashboard",
       name: "Admin Dashboard",
       component: () => import("@/pages/admin/dashboard.vue"),
     },

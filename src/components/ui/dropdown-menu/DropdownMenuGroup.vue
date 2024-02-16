@@ -1,7 +1,10 @@
-<script setup lang="ts">
-import { DropdownMenuGroup, type DropdownMenuGroupProps } from 'radix-vue'
+<script setup>
+import { DropdownMenuGroup } from "radix-vue";
 
-const props = defineProps<DropdownMenuGroupProps>()
+const props = defineProps({
+  asChild: { type: Boolean, required: false },
+  as: { type: null, required: false },
+});
 </script>
 
 <template>
