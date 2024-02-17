@@ -147,6 +147,7 @@ export const objectDataline = {
 };
 
 export const objectDataRadian = {
-  series: [44, 55, 67, 83],
-  labels: ["Apples", "Oranges", "Bananas", "Berries"],
+  colors: ["#FFCA57", "#0194EC", "#AAD9BB", "#D63484"],
+  labels: ["Ideas", "Under Development", "Production Project", "Abaddonly"],
+  series: [48, 44, 53, 10],
 };

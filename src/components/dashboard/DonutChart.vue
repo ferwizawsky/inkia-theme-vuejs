@@ -55,18 +55,21 @@ function getOption() {
 </script>
 <template>
   <div class="p-4 border rounded-xl shadow-md">
-    <apexchart type="donut" :options="options" :series="series" />
-    <div class="text-sm pt-6">
-      <div v-for="(item, index) in data?.series" class="flex justify-between">
-        <div class="flex-none flex items-center">
-          <div
-            class="w-2 h-2 rounded-full mr-2"
-            v-if="props?.data?.colors[index]"
-            :style="{ backgroundColor: props?.data?.colors[index] }"
-          ></div>
-          {{ props?.data?.labels[index] }}
+    <div class="font-semibold mb-4">Donut Chart</div>
+    <div>
+      <apexchart type="donut" :options="options" :series="series" />
+      <div class="text-sm pt-6">
+        <div v-for="(item, index) in data?.series" class="flex justify-between">
+          <div class="flex-none flex items-center">
+            <div
+              class="w-2 h-2 rounded-full mr-2"
+              v-if="props?.data?.colors[index]"
+              :style="{ backgroundColor: props?.data?.colors[index] }"
+            ></div>
+            {{ props?.data?.labels[index] }}
+          </div>
+          <div class="font-semibold">{{ item }}</div>
         </div>
-        <div class="font-semibold">{{ item }}</div>
       </div>
     </div>
   </div>

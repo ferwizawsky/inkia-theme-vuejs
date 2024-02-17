@@ -35,6 +35,7 @@ function getOption() {
       toolbar: {
         show: false,
       },
+      foreColor: "#999",
       type: "line",
     },
     tooltip: {

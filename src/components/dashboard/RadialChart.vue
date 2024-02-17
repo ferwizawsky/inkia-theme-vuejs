@@ -24,19 +24,22 @@ function getOption() {
       radialBar: {
         dataLabels: {
           name: {
-            fontSize: "22px",
+            fontSize: "14px",
           },
           value: {
             fontSize: "16px",
-          },
-          total: {
-            show: true,
-            label: "Total",
-            formatter: function (w) {
-              // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-              return 249;
+            formatter: function (val) {
+              return parseInt(val);
             },
           },
+          total: {
+            show: false,
+          },
+        },
+
+        track: {
+          show: true,
+          background: "#55555530",
         },
       },
     },
@@ -46,8 +49,21 @@ function getOption() {
 </script>
 <template>
   <div class="p-4 border rounded-xl shadow-md">
-    <div class="grid grid-cols-2 gap-4">
-      <div></div>
+    <div class="font-semibold">Radial Chart</div>
+    <div class="grid grid-cols-2 gap-4 items-center">
+      <div class="text-base pb-2">
+        <div v-for="(item, index) in data?.series" class="flex justify-between">
+          <div class="flex-none flex items-center">
+            <div
+              class="w-2 h-2 rounded-full mr-2"
+              v-if="props?.data?.colors[index]"
+              :style="{ backgroundColor: props?.data?.colors[index] }"
+            ></div>
+            {{ props?.data?.labels[index] }}
+          </div>
+          <div class="font-semibold">{{ item }}</div>
+        </div>
+      </div>
       <div>
         <apexchart type="radialBar" :options="options" :series="series" />
       </div>

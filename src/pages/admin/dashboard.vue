@@ -6,11 +6,12 @@ import {
   objectDataline,
   objectDataRadian,
 } from "@/composables/data/dashboard";
-import { Cloud, Users, Settings } from "lucide-vue-next";
+import { Cloud, Users, Settings, FileText, Gamepad2 } from "lucide-vue-next";
 import CardIcon from "@/components/inkia/card/CardIcon.vue";
 import CardBox from "@/components/inkia/card/CardBox.vue";
 import Cardia from "@/components/inkia/card/Cardia.vue";
 import CardSide from "@/components/inkia/card/CardSide.vue";
+import XBarChart from "@/components/dashboard/XBarChart.vue";
 
 const DashDocument = defineAsyncComponent(() =>
   import("@/components/icon/DashDocument.vue")
@@ -44,9 +45,41 @@ const dataRadian = ref(objectDataRadian);
     <div class="grid lg:grid-cols-7 gap-4">
       <div class="lg:col-span-5">
         <div class="grid lg:grid-cols-4 gap-4 my-4">
-          <Cardia v-for="index in 4">
-            <template #header> <DashDocument /> </template>
+          <Cardia>
+            <template #header>
+              <CardIcon class="text-blue-400 bg-blue-400/20 rounded-xl"
+                ><FileText />
+              </CardIcon>
+            </template>
             <template #title>Total Document</template>
+            <template #value>2.490</template>
+          </Cardia>
+
+          <Cardia>
+            <template #header>
+              <CardIcon class="rounded-xl"><Users /></CardIcon>
+            </template>
+            <template #title>Total User</template>
+            <template #value>2.490</template>
+          </Cardia>
+
+          <Cardia>
+            <template #header>
+              <CardIcon class="text-rose-400 bg-rose-400/20 rounded-xl"
+                ><Settings />
+              </CardIcon>
+            </template>
+            <template #title>Total Error</template>
+            <template #value>2.490</template>
+          </Cardia>
+
+          <Cardia>
+            <template #header>
+              <CardIcon class="text-lime-500 bg-lime-500/20 rounded-xl"
+                ><Gamepad2 />
+              </CardIcon>
+            </template>
+            <template #title>Total Deployment</template>
             <template #value>2.490</template>
           </Cardia>
         </div>
@@ -96,6 +129,8 @@ const dataRadian = ref(objectDataRadian);
             <CardBox title="MS" :value="48" />
           </template>
         </CardSide>
+
+        <XBarChart class="lg:col-span-2" />
       </div>
     </div>
   </div>
