@@ -21,6 +21,18 @@ const routes = [
       public: true,
     },
   },
+  {
+    path: "/404",
+    name: "404 Not Found",
+    component: () => import("@/pages/404.vue"),
+    meta: {
+      public: true,
+    },
+  },
+  {
+    path: "/:catchAll(.*)",
+    redirect: "/404",
+  },
   adminRoute,
 ];
 const router = createRouter({
