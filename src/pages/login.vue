@@ -1,11 +1,9 @@
 <script setup>
 import { h, ref } from "vue";
 import { useForm } from "vee-validate";
-
 import { toTypedSchema } from "@vee-validate/zod";
 import * as z from "zod";
 import { vAutoAnimate } from "@formkit/auto-animate/vue";
-
 import { Button } from "@/components/ui/button";
 import {
   FormControl,
@@ -18,7 +16,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/toast";
 import Toaster from "@/components/ui/toast/Toaster.vue";
+import { useOption } from "@/stores/option";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
+const option = useOption();
 const isPassword = ref(true);
 const formSchema = toTypedSchema(
   z.object({
@@ -38,14 +40,16 @@ const { handleSubmit } = useForm({
 });
 
 const onSubmit = handleSubmit((values) => {
-  toast({
-    title: "You submitted the following values:",
-    description: h(
-      "pre",
-      { class: "mt-2 w-[340px] rounded-md bg-slate-950 p-4" },
-      h("code", { class: "text-white" }, JSON.stringify(values, null, 2))
-    ),
-  });
+  option.updateToken(values.username);
+  router.push("/admin");
+  // toast({
+  //   title: "You submitted the following values:",
+  //   description: h(
+  //     "pre",
+  //     { class: "mt-2 w-[340px] rounded-md bg-slate-950 p-4" },
+  //     h("code", { class: "text-white" }, JSON.stringify(values, null, 2))
+  //   ),
+  // });
 });
 </script>
 
@@ -66,8 +70,9 @@ const onSubmit = handleSubmit((values) => {
           />
         </svg>
       </div>
-      <div class="font-medium text-xl">Sign In to Inkia</div>
+      <div class="font-medium text-xl">Sign In to {{ option.name }}</div>
       <!-- <div>Please fill form below to continue</div> -->
+      <!-- {{ option.token }} -->
     </div>
     <form
       class="p-6 space-y-4 border border-input pt-8 rounded-xl"

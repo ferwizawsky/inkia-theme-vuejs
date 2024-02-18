@@ -4,10 +4,10 @@ import Cookies from "js-cookie";
 import CryptoJS from "crypto-js";
 
 export const useOption = defineStore("option", () => {
-  const url = ref(process.env.VITE_API_URL || ""); // Implicit type inference
-  const name = ref(process.env.VITE_NAME || ""); // Implicit type inference
+  const url = ref(import.meta.env.VITE_API_URL || "");
+  const name = ref(import.meta.env.VITE_NAME || "");
   const token = ref("");
-  const secretKey = process.env.VITE_SECRET || "secret_123";
+  const secretKey = import.meta.env.VITE_SECRET || "secret_123";
 
   const setEncryptedTokenCookie = (tokenValue) => {
     const encryptedToken = CryptoJS.AES.encrypt(
@@ -15,6 +15,7 @@ export const useOption = defineStore("option", () => {
       secretKey
     ).toString();
     Cookies.set("encryptedToken", encryptedToken, { expires: 7 });
+    token.value = tokenValue;
   };
 
   const getDecryptedTokenCookie = () => {
@@ -28,6 +29,7 @@ export const useOption = defineStore("option", () => {
   };
 
   token.value = getDecryptedTokenCookie() || "";
+
   const updateToken = (newToken) => {
     token.value = newToken;
     setEncryptedTokenCookie(newToken);
