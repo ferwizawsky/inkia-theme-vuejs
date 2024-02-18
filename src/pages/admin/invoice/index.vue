@@ -28,6 +28,8 @@ function getStatus(e) {
   }
   return "text-rose-600";
 }
+
+function getData() {}
 </script>
 <template>
   <div class="pt-4">
@@ -35,8 +37,8 @@ function getStatus(e) {
       <div class="mb-4">
         <Button>Create Invoice</Button>
       </div>
-      <form class="mb-4 relative">
-        <Input v-model="search" class="pr-8" />
+      <form class="mb-4 relative" @submit.prevent="getData()">
+        <Input v-model="search" class="pr-8" placeholder="Search...." />
         <Search
           class="w-4 absolute top-2 right-3 cursor-pointer text-foreground/50"
         />
