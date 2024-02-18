@@ -8,12 +8,24 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+
 import { FileText, FilePenLine, Trash2, Search } from "lucide-vue-next";
 import { ref } from "vue";
 import { listInvoices, invoice } from "@/composables/data/invoice";
 import FunctionButton from "@/components/inkia/table/FunctionButton.vue";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
 const page = ref(1);
 const search = ref("");
@@ -35,7 +47,9 @@ function getData() {}
   <div class="pt-4">
     <div class="lg:flex items-center justify-between">
       <div class="mb-4">
-        <Button>Create Invoice</Button>
+        <RouterLink :to="`${$route.path}/add`">
+          <Button variant="outline">Create Invoice</Button>
+        </RouterLink>
       </div>
       <form class="mb-4 relative" @submit.prevent="getData()">
         <Input v-model="search" class="pr-8" placeholder="Search...." />
@@ -82,11 +96,28 @@ function getData() {}
                 <FilePenLine class="w-4 h-4" />
               </FunctionButton>
             </RouterLink>
-            <FunctionButton
-              class="bg-rose-400/20 hover:bg-rose-400/50 text-rose-500"
-            >
-              <Trash2 class="w-4 h-4" />
-            </FunctionButton>
+            <AlertDialog>
+              <AlertDialogTrigger as-child>
+                <FunctionButton
+                  class="bg-rose-400/20 hover:bg-rose-400/50 text-rose-500"
+                >
+                  <Trash2 class="w-4 h-4" />
+                </FunctionButton>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action cannot be undone. This will permanently delete
+                    your account and remove your data from our servers.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction>Continue</AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </TableCell>
         </TableRow>
       </TableBody>
