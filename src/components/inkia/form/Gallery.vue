@@ -52,7 +52,7 @@ watch(
         <img :src="index" class="h-[250px] object-cover w-full" />
       </div>
     </div>
-    <div v-else class="grid grid-cols-5 gap-4">
+    <div v-else class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
       <div
         class="group relative overflow-hidden rounded-lg shadow-md"
         v-for="(index, x) in listImg"

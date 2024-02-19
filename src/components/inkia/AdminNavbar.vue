@@ -213,7 +213,7 @@ onMounted(() => {
 }
 
 .navbar {
-  @apply transition-all duration-500 sticky left-0 w-full overflow-x-auto break-normal flex bg-background/10 backdrop-blur-sm z-30 top-0 text-sm pt-4 border-b border-gray-200 dark:border-foreground/10 text-foreground/40 space-x-4;
+  @apply sticky left-0 w-full overflow-x-auto break-normal flex bg-background/80 backdrop-blur-sm z-30 top-0 text-sm pt-4 border-b border-gray-200 dark:border-foreground/10 text-foreground/40 space-x-4;
 }
 
 .navbar::-webkit-scrollbar-thumb {

@@ -26,8 +26,12 @@ import { Input } from "@/components/ui/input";
 import { FileText, FilePenLine, Trash2, Search } from "lucide-vue-next";
 import { ref } from "vue";
 import { listInvoices, invoice, meta } from "@/composables/data/invoice";
+import { useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 import FunctionButton from "@/components/inkia/table/FunctionButton.vue";
 
+const router = useRouter();
+const route = useRoute();
 const page = ref(1);
 const search = ref("");
 const invoices = ref(listInvoices);
@@ -44,7 +48,7 @@ function getStatus(e) {
 
 function getData() {}
 function setPage(e) {
-  console.log(e, page.value);
+  router.push(`${route.path}?page=${e}`);
   page.value = e;
   getData();
 }
@@ -53,7 +57,7 @@ function setPage(e) {
   <div class="pt-4">
     <div class="lg:flex items-center justify-between">
       <div class="mb-4">
-        <RouterLink :to="`${$route.path}/add`">
+        <RouterLink :to="`${route.path}/add`">
           <Button variant="outline">Create Invoice</Button>
         </RouterLink>
       </div>
@@ -90,12 +94,12 @@ function setPage(e) {
             {{ item.totalAmount }}
           </TableCell>
           <TableCell class="flex items-center space-x-2">
-            <RouterLink :to="`${$route.path}/detail/${index}`">
+            <RouterLink :to="`${route.path}/detail/${index}`">
               <FunctionButton>
                 <FileText class="w-4 h-4" />
               </FunctionButton>
             </RouterLink>
-            <RouterLink :to="`${$route.path}/edit/${index}`">
+            <RouterLink :to="`${route.path}/edit/${index}`">
               <FunctionButton
                 class="bg-amber-400/20 hover:bg-amber-400/50 text-amber-500"
               >
