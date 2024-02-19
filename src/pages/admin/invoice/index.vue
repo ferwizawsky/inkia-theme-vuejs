@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import Paginate from "@/components/inkia/table/Paginate.vue";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -24,7 +25,7 @@ import { Input } from "@/components/ui/input";
 
 import { FileText, FilePenLine, Trash2, Search } from "lucide-vue-next";
 import { ref } from "vue";
-import { listInvoices, invoice } from "@/composables/data/invoice";
+import { listInvoices, invoice, meta } from "@/composables/data/invoice";
 import FunctionButton from "@/components/inkia/table/FunctionButton.vue";
 
 const page = ref(1);
@@ -42,6 +43,11 @@ function getStatus(e) {
 }
 
 function getData() {}
+function setPage(e) {
+  console.log(e, page.value);
+  page.value = e;
+  getData();
+}
 </script>
 <template>
   <div class="pt-4">
@@ -122,5 +128,12 @@ function getData() {}
         </TableRow>
       </TableBody>
     </Table>
+
+    <Paginate
+      @move="setPage($event)"
+      :page="page"
+      :list="meta?.links"
+      :meta="meta"
+    />
   </div>
 </template>

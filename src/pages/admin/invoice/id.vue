@@ -7,6 +7,8 @@ import { useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import * as z from "zod";
 import { vAutoAnimate } from "@formkit/auto-animate/vue";
+import Gallery from "@/components/inkia/form/Gallery.vue";
+import InputImage from "@/components/inkia/form/InputImage.vue";
 import {
   Select,
   SelectContent,
@@ -99,6 +101,24 @@ onMounted(() => {
               <FormMessage />
             </FormItem>
           </FormField>
+
+          <div>
+            <div class="font-semibold text-sm">Input Image</div>
+            <InputImage
+              v-model="object.image"
+              :image="null"
+              :edit="route.params.name != 'detail' ? true : false"
+            />
+          </div>
+
+          <div>
+            <div class="font-semibold text-sm">Input Image</div>
+            <InputImage
+              v-model="object.image"
+              :image="null"
+              :edit="route.params.name != 'detail' ? true : false"
+            />
+          </div>
         </div>
 
         <FormField v-slot="{ componentField }" name="paymentStatus">
@@ -124,7 +144,14 @@ onMounted(() => {
           </FormItem>
         </FormField>
 
-        <div class="text-center">
+        <Gallery
+          title="Gallery"
+          v-model="object.file_image"
+          :listImg="[]"
+          :edit="route.params.name != 'detail' ? true : false"
+        />
+
+        <div class="text-center" v-if="route.params.name != 'detail'">
           <Button type="submit" size="lg"> Submit </Button>
         </div>
       </form>

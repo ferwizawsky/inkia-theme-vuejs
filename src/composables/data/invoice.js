@@ -5,6 +5,48 @@ export const invoice = {
   paymentMethod: "",
 };
 
+export const meta = {
+  current_page: 1,
+  from: 1,
+  last_page: 4,
+  links: [
+    {
+      url: null,
+      label: "&laquo; Previous",
+      active: false,
+    },
+    {
+      url: "https://api-event.shiny.my.id/api/user?page=1",
+      label: "1",
+      active: true,
+    },
+    {
+      url: "https://api-event.shiny.my.id/api/user?page=2",
+      label: "2",
+      active: false,
+    },
+    {
+      url: "https://api-event.shiny.my.id/api/user?page=3",
+      label: "3",
+      active: false,
+    },
+    {
+      url: "https://api-event.shiny.my.id/api/user?page=4",
+      label: "4",
+      active: false,
+    },
+    {
+      url: "https://api-event.shiny.my.id/api/user?page=2",
+      label: "Next &raquo;",
+      active: false,
+    },
+  ],
+  path: "https://api-event.shiny.my.id/api/user",
+  per_page: 10,
+  to: 10,
+  total: 40,
+};
+
 export const listInvoices = [
   {
     invoice: "INV001",
