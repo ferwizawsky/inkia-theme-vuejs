@@ -8,10 +8,11 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: () => import("./pages/index.vue"),
-    meta: {
-      public: false,
-    },
+    redirect: "/admin",
+    // component: () => import("./pages/index.vue"),
+    // meta: {
+    //   public: false,
+    // },
   },
   {
     path: "/login",

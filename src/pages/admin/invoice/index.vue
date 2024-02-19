@@ -84,12 +84,12 @@ function getData() {}
             {{ item.totalAmount }}
           </TableCell>
           <TableCell class="flex items-center space-x-2">
-            <RouterLink :to="`${$route.path}/detail`">
+            <RouterLink :to="`${$route.path}/detail/${index}`">
               <FunctionButton>
                 <FileText class="w-4 h-4" />
               </FunctionButton>
             </RouterLink>
-            <RouterLink :to="`${$route.path}/edit`">
+            <RouterLink :to="`${$route.path}/edit/${index}`">
               <FunctionButton
                 class="bg-amber-400/20 hover:bg-amber-400/50 text-amber-500"
               >
