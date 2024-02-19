@@ -7,7 +7,15 @@ import { useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import * as z from "zod";
 import { vAutoAnimate } from "@formkit/auto-animate/vue";
-
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import {
   FormControl,
@@ -18,69 +26,109 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import Toaster from "@/components/ui/toast/Toaster.vue";
 import { toast } from "@/components/ui/toast";
 
 const route = useRoute();
-const invoice = ref(
-  route.params.id ? { username: "TTEST" } : listInvoices[route.params.id]
-);
+const object = ref(route.params.id ? listInvoices[route.params.id] : {});
+const statusList = ["Paid", "Unpaid", "Pending"];
 
-// Define form validation schema
-const formSchema = toTypedSchema(
-  z.object({
-    invoice: z.string().min(2, "Need more of 2 Length").max(50),
-  })
-);
+const formSchema = () => {
+  return toTypedSchema(
+    z.object({
+      invoice: z.string().min(2).max(50),
+      totalAmount: z.string(),
+      paymentStatus: z.string().min(2).max(50),
 
-// Create form instance
-const { handleSubmit } = useForm({
-  validationSchema: formSchema,
+      // totalAmount: z.number(),
+      // paymentStatus: z.string().min(2).max(50),
+    })
+  );
+};
+
+const { handleSubmit, defineField } = useForm({
+  validationSchema: formSchema(),
+  initialValues: object.value,
 });
 
-// Handle form submission
 const onSubmit = handleSubmit((values) => {
-  toast({
-    title: "You submitted the following values:",
-    description: h(
-      "pre",
-      { class: "mt-2 w-[340px] rounded-md bg-slate-950 p-4" },
-      h("code", { class: "text-white" }, JSON.stringify(values, null, 2))
-    ),
-  });
+  console.log(values);
 });
 
-// Fetch invoice data if route parameter is provided
 onMounted(() => {
-  if (route.params.id) invoice.value = listInvoices[route.params.id];
+  // You can add any additional initialization logic here if needed
+  console.log(object.value);
 });
 </script>
 
 <template>
   <div class="">
-    <div class="text-center capitalize font-semibold text-xl">
+    <div></div>
+    <div class="text-center capitalize font-semibold text-xl mb-10">
       {{ route.params.name }} Invoice
     </div>
     <div>
-      <form class="space-y-6" @submit="onSubmit">
-        <FormField v-slot="{ componentField }" name="invoice">
-          <FormItem v-auto-animate>
-            <FormLabel>Invoice</FormLabel>
-            <FormControl>
-              <!-- Bind input field to username property -->
-              <Input
-                type="text"
-                placeholder="shadcn"
-                v-model="invoice.invoice"
-              />
-            </FormControl>
-            <FormDescription>
-              This is your public display name.
-            </FormDescription>
+      <form class="space-y-6" @submit.prevent="onSubmit">
+        <div class="grid grid-cols-2 gap-4">
+          <FormField v-slot="{ componentField }" name="invoice">
+            <FormItem v-auto-animate>
+              <FormLabel>Invoice</FormLabel>
+              <FormControl>
+                <Input
+                  type="text"
+                  v-bind="componentField"
+                  :disabled="route.params.name == 'detail' ? true : false"
+                />
+              </FormControl>
+              <FormDescription> This Code Invoice </FormDescription>
+              <FormMessage />
+            </FormItem>
+          </FormField>
+
+          <FormField v-slot="{ componentField }" name="totalAmount">
+            <FormItem v-auto-animate>
+              <FormLabel>Total Amount</FormLabel>
+              <FormControl>
+                <Input
+                  type="text"
+                  placeholder="Total Amount"
+                  v-bind="componentField"
+                  :disabled="route.params.name == 'detail' ? true : false"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          </FormField>
+        </div>
+
+        <FormField v-slot="{ componentField }" name="paymentStatus">
+          <FormItem>
+            <FormLabel>Status</FormLabel>
+            <Select v-bind="componentField">
+              <FormControl>
+                <SelectTrigger
+                  :disabled="route.params.name == 'detail' ? true : false"
+                >
+                  <SelectValue placeholder="Select a status" />
+                </SelectTrigger>
+              </FormControl>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem v-for="item in statusList" :value="item">
+                    {{ item }}
+                  </SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
             <FormMessage />
           </FormItem>
         </FormField>
-        <Button type="submit"> Submit </Button>
+
+        <div class="text-center">
+          <Button type="submit" size="lg"> Submit </Button>
+        </div>
       </form>
     </div>
+    <Toaster />
   </div>
 </template>
