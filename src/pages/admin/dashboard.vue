@@ -98,9 +98,8 @@ const dataRadian = ref(objectDataRadian);
           </template>
           <template #title>User Group</template>
           <template #value>
-            <CardBox class="bg-foreground/10" title="Total" :value="100" />
-            <CardBox class="bg-lime-400/50" title="TMS" :value="10" />
-            <CardBox title="MS" :value="48" />
+            <CardBox class="bg-blue-400/40" title="User" :value="10" />
+            <CardBox title="Pro" :value="48" />
           </template>
         </CardSide>
 
@@ -112,21 +111,19 @@ const dataRadian = ref(objectDataRadian);
           </template>
           <template #title>Operation</template>
           <template #value>
-            <CardBox class="bg-foreground/10" title="Total" :value="100" />
-            <CardBox class="bg-lime-400/50" title="TMS" :value="10" />
-            <CardBox title="MS" :value="48" />
+            <CardBox class="" title="User" :value="10" />
+            <CardBox class="bg-rose-400/50" title="Bug" :value="48" />
           </template>
         </CardSide>
 
-        <CardSide v-for="index in 3">
+        <CardSide v-for="index in 2">
           <template #header>
             <CardIcon class="text-lime-500 bg-lime-500/20"><Cloud /></CardIcon>
           </template>
           <template #title>Server</template>
           <template #value>
-            <CardBox class="bg-foreground/10" title="Total" :value="100" />
-            <CardBox class="bg-lime-400/50" title="TMS" :value="10" />
-            <CardBox title="MS" :value="48" />
+            <CardBox class="bg-lime-400/50" title="Value" :value="10" />
+            <CardBox title="Sold" :value="48" />
           </template>
         </CardSide>
 

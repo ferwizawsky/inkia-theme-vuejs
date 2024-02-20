@@ -11,7 +11,7 @@ const props = defineProps({
   <div
     :class="
       cn(
-        'p-2.5 px-3 rounded-xl bg-amber-500/30 text-xs text-center flex items-center justify-center',
+        'p-2.5 px-3 rounded-xl bg-amber-500/40  text-xs text-center flex items-center justify-center',
         props.class
       )
     "

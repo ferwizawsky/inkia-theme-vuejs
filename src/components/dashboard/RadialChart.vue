@@ -50,7 +50,7 @@ function getOption() {
 <template>
   <div class="p-4 border rounded-xl shadow-md">
     <div class="font-semibold">Radial Chart</div>
-    <div class="grid grid-cols-2 gap-4 items-center">
+    <div class="grid lg:grid-cols-2 gap-4 items-center">
       <div class="text-base pb-2">
         <div v-for="(item, index) in data?.series" class="flex justify-between">
           <div class="flex-none flex items-center">
