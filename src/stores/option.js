@@ -8,6 +8,7 @@ export const useOption = defineStore("option", () => {
   const name = ref(import.meta.env.VITE_NAME || "");
   const token = ref("");
   const secretKey = import.meta.env.VITE_SECRET || "secret_123";
+  const sideBar = ref(false);
 
   const setEncryptedTokenCookie = (tokenValue) => {
     const encryptedToken = CryptoJS.AES.encrypt(
@@ -35,5 +36,5 @@ export const useOption = defineStore("option", () => {
     setEncryptedTokenCookie(newToken);
   };
 
-  return { url, name, token, updateToken };
+  return { url, name, token, updateToken, sideBar };
 });

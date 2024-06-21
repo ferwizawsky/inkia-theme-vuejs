@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-// import { useOption } from "@/stores/option";
-// import { useAuth } from "@/stores/auth";
+import { useOption } from "@/stores/option";
 
 import adminRoute from "@/routes/admin";
 
@@ -42,14 +41,14 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  // document.title = to.name + " | " + useOption().name;
-  // const token = useAuth().token;
+  document.title = to.name + " | " + useOption().name;
+  const token = useOption().token;
 
-  // if (!to.meta?.public && !token) {
-  //   next("/login");
-  // } else next();
+  if (!to.meta?.public && !token) {
+    next("/login");
+  } else next();
   // console.log(token);
-  next();
+  // next();
 });
 
 export default router;

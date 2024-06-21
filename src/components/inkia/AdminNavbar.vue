@@ -17,6 +17,7 @@ import {
   UserPlus,
   Users,
 } from "lucide-vue-next";
+import { useOption } from "@/stores/option";
 // import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -35,6 +36,7 @@ import {
 import { useRouter } from "vue-router";
 
 const notTop = ref(false);
+const option = useOption();
 const list = [
   {
     to: "/admin/dashboard",
@@ -59,6 +61,11 @@ const router = useRouter();
 //   } finally {
 //   }
 // }
+
+const logout = () => {
+  option.updateToken(null);
+  router.push("/login");
+};
 
 const handleScroll = () => {
   const rect = document.getElementById("navbar").getBoundingClientRect();
