@@ -10,7 +10,7 @@ const option = useOption();
     <DashNavbar />
     <div
       :class="!option.sideBar ? '-translate-x-full' : ''"
-      class="fixed p-4 left-0 top-14 h-screen overflow-y-auto w-[260px] z-30 xl:translate-x-0 ease-in-out duration-700 bg-background"
+      class="fixed p-4 left-0 top-14 h-screen overflow-y-auto border-r w-[260px] z-30 xl:translate-x-0 ease-in-out duration-700 bg-background"
     >
       <div class="relative">
         <button
@@ -37,7 +37,7 @@ const option = useOption();
       <LeftNavbar />
     </div>
 
-    <div class="max-w-[1320px] p-4 mx-auto">
+    <div class="max-w-[1320px] p-4 pl-[260px] mx-auto">
       <RouterView />
     </div>
   </div>

@@ -1,6 +1,6 @@
 <script setup>
-const props = defineProps(["list", "page", "meta"]);
-const emit = defineEmits(["move"]);
+const props = defineProps(["list", "page", "meta", "limitPaginate"]);
+const emit = defineEmits(["move", "update"]);
 
 function getClass(index) {
   let str = "";

@@ -29,12 +29,15 @@ import { listInvoices, invoice, meta } from "@/composables/data/invoice";
 import { useRoute } from "vue-router";
 import { useRouter } from "vue-router";
 import FunctionButton from "@/components/inkia/table/FunctionButton.vue";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const router = useRouter();
 const route = useRoute();
 const page = ref(1);
 const search = ref("");
 const invoices = ref(listInvoices);
+const selectedItem = ref([]);
+const limitPaginate = ref(10);
 
 function getStatus(e) {
   if (e === "paid") {
@@ -56,10 +59,28 @@ function setPage(e) {
 <template>
   <div class="pt-4">
     <div class="lg:flex items-center justify-between">
-      <div class="mb-4">
+      <div class="mb-4 space-x-4">
         <RouterLink :to="`${route.path}/add`">
           <Button variant="outline">Create Invoice</Button>
         </RouterLink>
+        <AlertDialog v-if="selectedItem.length">
+          <AlertDialogTrigger as-child>
+            <Button variant="destructive">Delete Invoice</Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete your
+                account and remove your data from our servers.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction>Continue</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
       <form class="mb-4 relative" @submit.prevent="getData()">
         <Input v-model="search" class="pr-8" placeholder="Search...." />
@@ -69,9 +90,23 @@ function setPage(e) {
       </form>
     </div>
     <Table>
-      <TableCaption>A list of your recent invoices.</TableCaption>
+      <TableCaption> A list of your recent invoices. </TableCaption>
       <TableHeader>
         <TableRow>
+          <TableHead class="">
+            <Checkbox
+              :checked="selectedItem.length == invoices.length"
+              @update:checked="
+                {
+                  if (selectedItem.length == invoices.length) {
+                    selectedItem = [];
+                  } else {
+                    selectedItem = [...invoices];
+                  }
+                }
+              "
+            />
+          </TableHead>
           <TableHead class=""> No. </TableHead>
           <TableHead class=""> Invoice </TableHead>
           <TableHead>Status</TableHead>
@@ -82,6 +117,28 @@ function setPage(e) {
       </TableHeader>
       <TableBody>
         <TableRow v-for="(item, index) in invoices">
+          <TableCell class="">
+            <Checkbox
+              :checked="
+                selectedItem?.findIndex((e) => e.invoice == item.invoice) != -1
+              "
+              @update:checked="
+                {
+                  if (
+                    selectedItem?.findIndex((e) => e.invoice == item.invoice) !=
+                    -1
+                  ) {
+                    selectedItem.splice(
+                      selectedItem?.findIndex((e) => e.invoice == item.invoice),
+                      1
+                    );
+                  } else {
+                    selectedItem.push(item);
+                  }
+                }
+              "
+            />
+          </TableCell>
           <TableCell>{{ (page - 1) * 10 + index + 1 }}</TableCell>
           <TableCell class="font-medium">
             {{ item.invoice }}
@@ -138,6 +195,7 @@ function setPage(e) {
       :page="page"
       :list="meta?.links"
       :meta="meta"
+      @update="limitPaginate = $event"
     />
   </div>
 </template>
