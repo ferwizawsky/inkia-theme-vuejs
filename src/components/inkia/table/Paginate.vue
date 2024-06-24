@@ -1,6 +1,20 @@
 <script setup>
+import { onMounted, ref, watch } from "vue";
+
 const props = defineProps(["list", "page", "meta", "limitPaginate"]);
 const emit = defineEmits(["move", "update"]);
+const limit = ref(0);
+
+onMounted(() => {
+  limit.value = Number(props.limitPaginate ?? 0);
+});
+
+watch(
+  () => limit.value,
+  (e) => {
+    emit("update", e);
+  }
+);
 
 function getClass(index) {
   let str = "";
@@ -16,7 +30,14 @@ function getClass(index) {
 </script>
 <template>
   <div class="grid lg:grid-cols-3 gap-4 items-center mt-2 border-gray-700 pt-4">
-    <div>Showing {{ meta?.from }} to 10 of {{ meta?.total }} entries</div>
+    <div class="flex items-center">
+      Showing {{ meta?.from }} to
+      <input
+        v-model="limit"
+        class="max-w-[50px] px-2 py-1 mx-2 bg-foreground/5 focus:outline-none border rounded-xl"
+      />
+      of {{ meta?.total }} entries
+    </div>
     <div class="lg:ml-auto mx-auto lg:mr-0 lg:col-span-2">
       <div class="px-4 w-full flex flex-wrap items-center">
         <button

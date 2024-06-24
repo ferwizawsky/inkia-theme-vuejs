@@ -10,6 +10,11 @@ export default {
       component: () => import("@/pages/admin/dashboard.vue"),
     },
     {
+      path: "dashboardchartjs",
+      name: "Admin Dashboard Chart Js",
+      component: () => import("@/pages/admin/dashboardChartJs.vue"),
+    },
+    {
       path: "invoice",
       name: "Admin invoice",
       component: () => import("@/pages/admin/invoice/index.vue"),

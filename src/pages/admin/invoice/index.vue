@@ -195,6 +195,7 @@ function setPage(e) {
       :page="page"
       :list="meta?.links"
       :meta="meta"
+      :limit-paginate="limitPaginate"
       @update="limitPaginate = $event"
     />
   </div>
