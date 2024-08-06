@@ -14,6 +14,14 @@ const routes = [
     // },
   },
   {
+    path: "/fext",
+    name: "Fext",
+    component: () => import("@/pages/fext/index.vue"),
+    meta: {
+      public: true,
+    },
+  },
+  {
     path: "/login",
     name: "Login",
     component: () => import("@/pages/login.vue"),
