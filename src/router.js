@@ -14,6 +14,14 @@ const routes = [
     // },
   },
   {
+    path: "/login2",
+    name: "Login2",
+    component: () => import("@/pages/login2.vue"),
+    meta: {
+      public: true,
+    },
+  },
+  {
     path: "/login",
     name: "Login",
     component: () => import("@/pages/login.vue"),
