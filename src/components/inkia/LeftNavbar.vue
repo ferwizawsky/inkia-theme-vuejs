@@ -25,10 +25,6 @@ const list = [
 </script>
 <template>
   <div class="pt-16 text-sm">
-    <!-- <div
-      v-for="index in list"
-      :class="auth.isAllowed(index.role) || !index.role ? '' : 'hidden'"
-    > -->
     <div v-for="index in list" :class="!index.role ? '' : 'hidden'">
       <RouterLink :to="`/admin/${index.to}`">
         <button
