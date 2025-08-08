@@ -1,4 +1,5 @@
 <script setup>
+import { BarChart, FileText } from "lucide-vue-next";
 import { RouterLink } from "vue-router";
 // import Icon from "@/components/Icon.vue";
 // import { useAuth } from "@/stores/auth";
@@ -7,12 +8,12 @@ import { RouterLink } from "vue-router";
 const list = [
   {
     to: "dashboard",
-    icon: "dashboard",
+    icon: BarChart,
   },
   {
     to: "invoice",
     text: "Invoices",
-    icon: "invoices",
+    icon: FileText,
     children: ["day", "month", "uearly"],
   },
 
@@ -23,7 +24,7 @@ const list = [
 ];
 </script>
 <template>
-  <div class="pt-6 text-sm">
+  <div class="pt-16 text-sm">
     <!-- <div
       v-for="index in list"
       :class="auth.isAllowed(index.role) || !index.role ? '' : 'hidden'"
@@ -38,7 +39,7 @@ const list = [
               : 'hover:text-primary'
           "
         >
-          <Icon :value="index.icon" class="mr-3" />
+          <component :is="index.icon" class="w-4 h-4 mr-4" />
           <span class="capitalize">{{
             index.text ?? index.to.replace("-", " ")
           }}</span>
