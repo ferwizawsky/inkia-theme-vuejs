@@ -73,6 +73,11 @@ const handleScroll = () => {
 };
 
 function toggleTheme() {
+  if (document.documentElement.classList.contains("dark")) {
+    localStorage.setItem("theme", "light");
+  } else {
+    localStorage.setItem("theme", "dark");
+  }
   document.documentElement.classList.toggle("dark");
 }
 
