@@ -35,10 +35,11 @@ export const useMyFetch = async (method = "GET", request = "/", opts) => {
     Accept: "application/json",
   };
   let url = option.url;
-  if (auth.isAuthenticated) {
+  const auth = option.token;
+  if (auth) {
     header_option = {
       // Authorization: auth?.token,
-      authorization: "Bearer " + auth?.token,
+      authorization: "Bearer " + auth,
       Accept: "application/json",
     };
   }
