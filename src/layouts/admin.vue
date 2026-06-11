@@ -8,6 +8,18 @@ const option = useOption();
 <template>
   <div>
     <DashNavbar />
+    <div class="relative">
+      <button
+        class="btn-square-out xl:hidden fixed top-4 left-4 z-40"
+        @click="option.sideBar = !option.sideBar"
+      >
+        <Menu
+          :class="option.sideBar ? 'rotate-90' : ''"
+          class="ease-in-out duration-300"
+        />
+      </button>
+      <!-- <img src="/mahameru.png" class="w-[120px] mx-auto" /> -->
+    </div>
     <div
       :class="!option.sideBar ? '-translate-x-full' : ''"
       class="fixed p-4 left-0 top-14 h-screen overflow-y-auto border-r w-[260px] z-30 xl:translate-x-0 ease-in-out duration-700 bg-background"
